@@ -19,6 +19,7 @@ const styles = StyleSheet.create({
         padding: 8,
     },
     detailItem: {
-        marginHorizontal: 4
+        marginHorizontal: 4,
+        color: 'white',
     }
 })
