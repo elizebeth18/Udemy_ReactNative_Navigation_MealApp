@@ -1,30 +1,56 @@
 import { useLayoutEffect } from "react";
+import { useSelector, useDispatch } from "react-redux";
 import { View, Button, Image, Text, StyleSheet, ScrollView } from "react-native";
 import { MEALS } from "../data/dummy-data";
 import MealDetails from "../components/MealDetails";
 import SubTitle from "../components/MealDetail/SubTitle";
 import List from "../components/MealDetail/List";
 import IconButton from "../components/IconButton";
+import { addFavourite, removeFavourite } from "../store/redux/favouriteMealSlice";
 
 const MealDetailScreen = ({ navigation, route }) => {
     const mealId = route.params.id;
-    const mealName = route.params.title
+    const mealName = route.params.title;
 
     const selectedMeal = MEALS.find((meal) => meal.id === mealId);
 
-    const headerButtonPressHandler = () => {
-        //console.log('pressed')
+    const favMealIds = useSelector((state) => state.favouriteMeals.ids);
+    const dispatch = useDispatch();
+
+    const mealIsFavourite = favMealIds.includes(mealId);
+
+    
+
+
+    
+
+    
+
+    console.log(mealIsFavourite);
+
+    const changeFavouriteStatusHandler = () => {
+
+        if (mealIsFavourite) {
+            console.log('inside remove changeFa()');
+            dispatch(removeFavourite({ id: mealId }));
+        } else {
+            console.log('inside changeFa()');
+            dispatch(addFavourite({ id: mealId }));
+        }
     }
 
     useLayoutEffect(() => {
         navigation.setOptions({
             headerRight: () => {
                 return (
-                    <IconButton icon="star" color="white" onJPress={headerButtonPressHandler} />
+                    <IconButton
+                        icon={mealIsFavourite ? "star" : 'star-outline'} color="white"
+                        onJPress={changeFavouriteStatusHandler}
+                    />
                 )
             }
         })
-    }, [navigation]);
+    }, [navigation, changeFavouriteStatusHandler]);
 
     return (
         <ScrollView style={styles.rootContainer}>
