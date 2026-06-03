@@ -5,7 +5,6 @@ const MealsList = ({ meals }) => {
 
     const renderMealItem = (itemData) => {
 
-        console.log(itemData)
         const item = itemData.item;
 
         const mealItemProps = {

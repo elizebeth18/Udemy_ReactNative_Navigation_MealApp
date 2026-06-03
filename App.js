@@ -63,6 +63,7 @@ const DrawerNavigator = () => {
         name='Vegan'
         component={VeganScreen}
         options={{
+          headerTitle: 'Vegan',
           drawerIcon: ({ color, size }) => {
             return <Ionicons name="leaf" size={size} color={color} />
           }

@@ -1,10 +1,23 @@
 import { View, FlatList } from 'react-native';
-import { CATEGORIES } from '../data/dummy-data';
+import { MEALS, CATEGORIES } from '../data/dummy-data';
 import CategoryGridTitle from '../components/CategoryGridTile';
-
+import {  useLayoutEffect,useEffect } from 'react';
+import { useDispatch } from 'react-redux';
+import { addVeganFood } from '../store/redux/veganMealSlice';
 
 
 const CategoriesScreen = ({ navigation }) => {
+
+    const dispatch = useDispatch();
+
+    useLayoutEffect(()=>{
+
+        const veganList = MEALS
+            .filter((meal) => meal.isVegan === true)
+            .map(meal => meal.id);
+        
+        dispatch(addVeganFood(veganList));
+    }, []);
 
     const renderCategoryItem = (itemData) => {
         const pressHandler = () => {
@@ -21,6 +34,7 @@ const CategoriesScreen = ({ navigation }) => {
             />
         );
     }
+
     return (
         <FlatList data={CATEGORIES}
             keyExtractor={(item) => item.id}

@@ -19,22 +19,13 @@ const MealDetailScreen = ({ navigation, route }) => {
 
     const mealIsFavourite = favMealIds.includes(mealId);
 
-    
 
-
-    
-
-    
-
-    console.log(mealIsFavourite);
 
     const changeFavouriteStatusHandler = () => {
 
         if (mealIsFavourite) {
-            console.log('inside remove changeFa()');
             dispatch(removeFavourite({ id: mealId }));
         } else {
-            console.log('inside changeFa()');
             dispatch(addFavourite({ id: mealId }));
         }
     }

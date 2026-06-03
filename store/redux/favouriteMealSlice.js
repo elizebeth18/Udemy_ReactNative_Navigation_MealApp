@@ -9,7 +9,7 @@ const favouriteMealsListSlice = createSlice({
     initialState,
     reducers: {
         addFavouriteMeal: (state, action) => {
-            console.log('inside add meal slice'+ action.payload.id);
+            //console.log('inside add meal slice'+ action.payload.id);
             state.ids.push(action.payload.id)
         },
         removeFavouriteMeal: (state, action) => {
